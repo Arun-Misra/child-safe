@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parent Dashboard</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <main class="wrap">
+    <section class="panel">
+      <header class="panel-head">
+        <div>
+          <h1>Parent Dashboard</h1>
+          <p>Recent child browsing activity from the extension</p>
+        </div>
+        <div class="actions">
+          <button id="refreshBtn">Refresh</button>
+          <button id="clearBtn" class="danger">Clear</button>
+        </div>
+      </header>
+
+      <div class="meta" id="metaText">Loading...</div>
+
+      <div class="meta" id="blockedSitesSection" style="display: none; background: #fff5f5; border-bottom: 1px solid #ffcccc;">
+        <strong style="color: #b42318; font-size: 13px;">🛑 Currently Blocked Sites:</strong>
+        <div id="blockedSitesList" style="margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap;">
+        </div>
+      </div>
+
+      <div style="background: #1e1e2e; padding: 20px; border-radius: 12px; margin: 20px 0; border: 1px solid #313244; color: #cdd6f4; font-family: sans-serif;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+              <h2 style="margin: 0; color: #89b4fa;">🧠 AI Behavior Analysis</h2>
+              <span style="font-size: 12px; color: #a6adc8;" id="ai-last-updated">Waiting for AI...</span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px;">
+              <div style="background: #313244; padding: 15px; border-radius: 8px;">
+                  <div style="font-size: 12px; text-transform: uppercase; color: #a6adc8;">Risk Level</div>
+                  <div id="ui-risk" style="font-size: 24px; font-weight: bold;">-</div>
+              </div>
+              <div style="background: #313244; padding: 15px; border-radius: 8px;">
+                  <div style="font-size: 12px; text-transform: uppercase; color: #a6adc8;">Overall Sentiment</div>
+                  <div id="ui-sentiment" style="font-size: 24px; font-weight: bold; text-transform: capitalize;">-</div>
+              </div>
+              <div style="background: #313244; padding: 15px; border-radius: 8px;">
+                  <div style="font-size: 12px; text-transform: uppercase; color: #a6adc8;">Dominant Emotions</div>
+                  <div id="ui-emotions" style="font-size: 16px; margin-top: 5px;">-</div>
+              </div>
+          </div>
+
+          <div style="background: #313244; padding: 20px; border-radius: 8px;">
+              <h3 style="margin-top: 0; color: #a6e3a1;">💡 Parent Action Plan</h3>
+              <p id="ui-summary" style="font-style: italic; color: #bac2de;">Analyzing recent activity...</p>
+              <ul id="ui-actions" style="margin-bottom: 0; padding-left: 20px; color: #cdd6f4;">
+                  <li>No actions needed yet.</li>
+              </ul>
+          </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Time</th>
+              <th>Title</th>
+              <th>URL</th>
+              <th>Search</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+
+      <div class="footer">
+        <button id="loadMoreBtn">Load More</button>
+      </div>
+
+      <div id="empty" class="empty" hidden>No activities yet. Keep this page open while child browses.</div>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

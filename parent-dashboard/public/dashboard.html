@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Parent Dashboard</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --glass-bg: rgba(30, 41, 59, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent-blue: #38bdf8;
+            --accent-purple: #c084fc;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(192, 132, 252, 0.15) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .dashboard-container {
+            width: 90%;
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 24px;
+            padding: 24px;
+        }
+
+        /* The Glassmorphism Card Effect */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 { margin-top: 0; font-size: 1.5rem; font-weight: 600; }
+        h3 { color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Left Column: Quick Stats & Status */
+        .status-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: #4ade80;
+            background: rgba(74, 222, 128, 0.1);
+            padding: 6px 12px;
+            border-radius: 20px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background-color: #4ade80;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(74, 222, 128, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+        }
+
+        .stat-block { margin-bottom: 24px; }
+        .stat-value { font-size: 2.5rem; font-weight: bold; background: -webkit-linear-gradient(45deg, var(--accent-blue), var(--accent-purple)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* Right Column: AI Insights & Feed */
+        .insight-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent-blue);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .activity-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        /* Custom Scrollbar */
+        .activity-feed::-webkit-scrollbar { width: 6px; }
+        .activity-feed::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+
+        .feed-item {
+            background: rgba(0,0,0,0.2);
+            border-left: 3px solid var(--accent-purple);
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.95rem;
+        }
+        .feed-time { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px; }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-container">
+        
+        <div class="glass-card">
+            <div class="status-header">
+                <h2>System Hub</h2>
+                <div class="live-indicator"><div class="dot"></div> Engine Active</div>
+            </div>
+
+            <div class="stat-block">
+                <h3>Current Intent</h3>
+                <div class="stat-value" id="ui-intent">Studying</div>
+            </div>
+
+            <div class="stat-block">
+                <h3>URLs Analyzed</h3>
+                <div class="stat-value" style="font-size: 2rem; color: var(--text-main); -webkit-text-fill-color: var(--text-main);">42</div>
+            </div>
+
+            <div class="stat-block">
+                <h3>Voice AI State</h3>
+                <div style="color: var(--text-muted);">Idle / Ready</div>
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <h2>Phi-4 Cognitive Profile</h2>
+            <h3>Dominant Emotions</h3>
+            
+            <div class="insight-tags" id="ui-emotions">
+                <div class="tag">Focused</div>
+                <div class="tag" style="color: var(--accent-purple); border-color: rgba(192, 132, 252, 0.2); background: rgba(192, 132, 252, 0.1);">Slightly Frustrated</div>
+            </div>
+
+            <h3 style="margin-top: 30px;">Recent Activity Stream</h3>
+            <div class="activity-feed">
+                <div class="feed-item">
+                    <div class="feed-time">10:42 AM</div>
+                    <div>Searched: "how to do long division step by step"</div>
+                </div>
+                <div class="feed-item" style="border-left-color: var(--accent-blue);">
+                    <div class="feed-time">10:35 AM</div>
+                    <div>Accessed: mathisfun.com/numbers/division.html</div>
+                </div>
+                <div class="feed-item">
+                    <div class="feed-time">10:30 AM</div>
+                    <div>Gemini Voice: "I'm having trouble with math."</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+  "name": "Family Web Monitor",
+  "version": "1.0",
+  "description": "Monitors browsing activity and shows recent items in a popup.",
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>",
+    "tabs"
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "Parent Dashboard"
+  },
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
+}

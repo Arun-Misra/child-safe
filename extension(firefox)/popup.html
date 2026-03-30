@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { width: 350px; font-family: Arial, sans-serif; padding: 10px; margin: 0; }
+    h2 { margin-top: 0; font-size: 18px; border-bottom: 2px solid #333; padding-bottom: 5px; }
+    .activity { border-bottom: 1px solid #ddd; padding: 10px 0; }
+    .title { font-weight: bold; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .url { color: #555; font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px;}
+    .search { color: #d93025; font-size: 12px; font-weight: bold; margin-top: 4px; }
+    #loadMore { display: none; width: 100%; padding: 10px; margin-top: 15px; cursor: pointer; background: #eee; border: 1px solid #ccc; font-weight: bold;}
+    #loadMore:hover { background: #e0e0e0; }
+    #openDashboard { width: 100%; padding: 10px; margin-top: 8px; cursor: pointer; background: #f7f7f7; border: 1px solid #ccc; }
+    #openDashboard:hover { background: #ececec; }
+    #noData { text-align: center; color: gray; display: none; margin-top: 20px;}
+  </style>
+</head>
+<body>
+  <h2>Recent Activity</h2>
+  <div id="activityList"></div>
+  <p id="noData">No activity recorded yet.</p>
+  <button id="loadMore">Load More Activities</button>
+  <button id="openDashboard">Open Full Dashboard</button>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

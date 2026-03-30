@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Parent Activity Dashboard</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --primary: #0f766e;
+      --primary-soft: #e6fffb;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, #eef8f6 0%, var(--bg) 200px);
+      color: var(--text);
+      font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+      overflow: hidden;
+    }
+
+    .header {
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .title {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    .subtitle {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      min-width: 220px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 14px;
+    }
+
+    button {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      background: #fff;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    button.primary {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+
+    button:hover { opacity: 0.95; }
+
+    .summary {
+      padding: 12px 16px;
+      background: var(--primary-soft);
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      color: #0b4f49;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+    }
+
+    th, td {
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      padding: 10px 12px;
+      vertical-align: top;
+      font-size: 13px;
+    }
+
+    th {
+      background: #fafafa;
+      font-size: 12px;
+      color: #4b5563;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    td.url {
+      max-width: 380px;
+      word-break: break-all;
+      color: #374151;
+    }
+
+    td.search {
+      color: #b91c1c;
+      font-weight: 600;
+    }
+
+    .empty {
+      padding: 20px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .footer {
+      padding: 14px 16px;
+      display: flex;
+      justify-content: center;
+      border-top: 1px solid var(--border);
+    }
+
+    #loadMoreBtn { display: none; }
+
+    @media (max-width: 720px) {
+      .container { padding: 12px; }
+      .title { font-size: 20px; }
+      .toolbar { flex-direction: column; }
+      button { width: 100%; }
+      input[type="text"] { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="header">
+        <div>
+          <h1 class="title">Parent Activity Dashboard</h1>
+          <p class="subtitle">Latest browsing activity stored on this browser</p>
+        </div>
+        <div class="toolbar">
+          <input id="searchInput" type="text" placeholder="Search by title, URL, or query...">
+          <button id="refreshBtn">Refresh</button>
+          <button id="clearBtn">Clear All</button>
+          <button class="primary" id="exportBtn">Export CSV</button>
+        </div>
+      </div>
+
+      <div class="summary" id="summaryText">Loading activity...</div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 80px;">#</th>
+              <th style="width: 260px;">Page Title</th>
+              <th>URL</th>
+              <th style="width: 200px;">Search Query</th>
+            </tr>
+          </thead>
+          <tbody id="activityRows"></tbody>
+        </table>
+      </div>
+
+      <div class="empty" id="emptyState" style="display:none;">No activity found.</div>
+
+      <div class="footer">
+        <button id="loadMoreBtn">Load More</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>
